@@ -222,6 +222,7 @@ def read_query(connection, query):
 
 
 # try it out with a JOIN
+
 query5 = """
 SELECT course.course_id, course.course_name, course.language, client.client_name, client.address
 FROM course
@@ -236,7 +237,45 @@ results = read_query(connection, query5)
 for result in results:
     print(result)
 
+# formatting output into a list
 
+# from_db = []
 
+# for result in results:
+#     result = result
+#     from_db.append(result)
 
+# print(from_db)
 
+# formatting output into a pandas dataframe
+
+# from_db = []
+
+# for result in results:
+#     result = list(result)
+#     from_db.append(result)
+
+# columns = ["course_id", "course_name", "language", "client_name", "address"]
+# df = pd.DataFrame(from_db, columns=columns)
+
+# print(df)
+
+# updating records
+
+update = """
+UPDATE client
+SET address = '107 Briston Private, Ottawa'
+WHERE client_id = 101;
+"""
+connection = create_database_connection("localhost", "root", pw, db)
+execute_query(connection, update)
+
+# deleting records
+
+delete_course = """
+DELETE FROM course
+WHERE course_id = 14;
+"""
+
+connection = create_database_connection("localhost", "root", pw, db)
+execute_query(connection, delete_course)
